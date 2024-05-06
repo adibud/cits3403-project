@@ -1,32 +1,29 @@
-import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, flash, g, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_urlsafe(16)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-DATABASE = 'database.db'
+db = SQLAlchemy(app)
 
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-        db.row_factory = sqlite3.Row
-    return db
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100), unique=True, nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
 
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-def init_db():
-    with app.app_context():
-        db = get_db()
-        with app.open_resource('schema.sql', mode='r') as f:
-            db.cursor().executescript(f.read())
-        db.commit()
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 @app.route('/')
 def index():
@@ -39,15 +36,14 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        hashed_password = generate_password_hash(password)
-        db = get_db()
-        cur = db.cursor()
-        cur.execute("SELECT id FROM users WHERE username = ?", (username,))
-        if cur.fetchone() is not None:
+        user = User.query.filter_by(username=username).first()
+        if user:
             flash('Username already exists.')
             return redirect(url_for('register'))
-        cur.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
-        db.commit()
+        new_user = User(username=username)
+        new_user.set_password(password)
+        db.session.add(new_user)
+        db.session.commit()
         return redirect(url_for('login'))
     return render_template('register.html')
 
@@ -56,11 +52,8 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
-        cur = db.cursor()
-        cur.execute("SELECT password FROM users WHERE username = ?", (username,))
-        user = cur.fetchone()
-        if user and check_password_hash(user['password'], password):
+        user = User.query.filter_by(username=username).first()
+        if user and user.check_password(password):
             session['username'] = username
             return redirect(url_for('index'))
         flash('Invalid username or password')
