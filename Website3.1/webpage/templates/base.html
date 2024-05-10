@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Campus Life{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+    <style>
+        .header1 {
+        background-color: navy;
+        color: orange;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        }
+
+        .header1 .button_login {
+        background-color:navy; 
+        color: white;
+        }
+
+        .header1 .button_home {
+        background-color:navy; 
+        color: white;
+        order: -1; 
+        margin-right: auto; 
+        }
+
+        .header1 a {
+        background-color: white;
+        color: navy;
+        border-radius: 7px; 
+        border: 1px navy solid;
+        padding: 7px;
+        margin: 0px 10px;
+        cursor: pointer;
+        }
+
+        .header1 .button_login {
+        background-color:navy; 
+        color: white;
+        }
+
+
+
+        header a:hover {
+            text-decoration: none;
+        }
+
+        .header1 .search-bar {
+            display: flex;
+            align-items: center;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <header class = "header1">
+            <a class = "button_home" href="">Home</a></li>
+
+            <div class="search-bar">
+                <input class="search-bar" type="search">
+            </div>
+
+            {% if current_user.is_authenticated %}
+            <a href="/logout">Logout</a></li>
+            {% else %}
+            <a class = "button" href="/register" target = "blank">Register</a></li>
+            <a class = "button_login" href="/login" target = "blank">Login</a></li>
+            {% endif %}
+    
+            </ul>
+
+        </header>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %} {% if category ==
+        'error' %}
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alter-dismissable fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>
