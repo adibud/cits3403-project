@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}User Dashboard{% endblock %}
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
+    body {
+        background-image: url('https://wallpapers-clan.com/wp-content/uploads/2023/10/pokemon-eevee-aesthetic-night-desktop-wallpaper-preview.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .dashboard-box {
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 800px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+        margin-top: 20px;
+    }
+
+    .profile-info, .requests-list {
+        margin-bottom: 20px;
+    }
+
+    .profile-info h2, .requests-list h2 {
+        font-size: 1.5em;
+    }
+
+    .request-item {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    .request-item:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="dashboard-box">
+            <div class="profile-info">
+                <h2>Your Profile</h2>
+                <p>Username: <strong>PokeMaster123</strong></p>
+                <p>Email: <strong>pokemaster@example.com</strong></p>
+            </div>
+            <div class="requests-list">
+                <h2>Your Active Requests</h2>
+                <div class="request-item">Request #1 - Seeking Bulbasaur Card</div>
+                <div class="request-item">Request #2 - Offering Charizard Card</div>
+                <!-- More active requests -->
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
