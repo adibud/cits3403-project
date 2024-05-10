@@ -11,7 +11,7 @@ auth = Blueprint('auth', __name__)
 def profile():
     return render_template('profile.html')
 
-#login not working, keeps saying email doesn,t exist even though in db, might have trouble reading db
+#login working 
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
     
@@ -32,6 +32,7 @@ def login():
     
     return render_template("login.html", user=current_user)
 
+#logout mechanisms working
 @auth.route('/logout')
 @login_required
 def logout():
@@ -39,14 +40,16 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-#register works fine
+#register working
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         username = request.form.get('username')
-        
+
+
+        #still need to update register constraints 
         user = users.query.filter_by(email=email).first()
         if user:
             flash('Email already in use', category='error')
@@ -57,6 +60,8 @@ def register():
             new_user = users(email=email, username=username, password=generate_password_hash(password, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
+
+            #logs in user as soon as they register 
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('auth.login')) 
