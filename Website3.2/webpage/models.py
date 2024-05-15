@@ -2,6 +2,15 @@ from . import db
 from flask_login import UserMixin 
 from sqlalchemy import func, TIMESTAMP, text, ForeignKeyConstraint
 
+class comments(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    request_id = db.Column(db.Integer, db.ForeignKey('requests.id'))
+
+
+
+
 class requests(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
