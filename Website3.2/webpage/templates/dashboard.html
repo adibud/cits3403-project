@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}User Dashboard{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="dashboard-box">
+        <div class="profile-info">
+            <h2>Your Profile</h2>
+            <p>Username: <strong>{{ current_user.username }}</strong></p>
+            <p>Email: <strong>{{ current_user.email }}</strong></p>
+        </div>
+        <div class="requests-list">
+            <h2>Your Active Requests</h2>
+          
+                <ul>
+                
+                    {% for req in user_reqs %}
+                        <hr>
+                        <p class="rTitle">{{ req.title }}</p>
+                        <p>{{ req.descr }}</p>
+                        <p>{{ req.quantity }}</p>
+                    {% endfor %}
+                </ul>
+
+            <div class="request-item">
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
