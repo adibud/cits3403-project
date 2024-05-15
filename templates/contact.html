@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
+{% block title %}Contact Us{% endblock %}
 {% block content %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
     body {
         background-image: url('https://wallpapers-clan.com/wp-content/uploads/2023/10/pokemon-eevee-aesthetic-night-desktop-wallpaper-preview.jpg');
         background-size: cover;
@@ -13,6 +14,7 @@
         color: #ffffff;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
+
     .container {
         display: flex;
         flex-direction: column;
@@ -20,7 +22,8 @@
         align-items: center;
         padding-top: 70px;
     }
-    .dashboard-box {
+
+    .contact-box {
         background-color: rgba(0, 0, 0, 0.6);
         padding: 30px;
         border-radius: 20px;
@@ -30,40 +33,39 @@
         text-align: center;
         margin-bottom: 20px;
     }
-    .dashboard-box h1 {
+
+    .contact-box h1 {
         font-family: 'Press Start 2P', cursive;
         font-size: 24px;
         margin-bottom: 20px;
     }
-    .dashboard-box p {
+
+    .contact-box p {
         font-size: 16px;
         line-height: 1.5;
         margin-bottom: 20px;
     }
-    .requests {
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
         width: 90%;
-        max-width: 800px;
-        margin-bottom: 20px;
-    }
-    .request-item {
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 15px;
+        max-width: 600px;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: none;
         border-radius: 10px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-        margin-bottom: 10px;
-        text-align: left;
+        font-size: 16px;
     }
-    .request-item h2 {
-        font-family: 'Press Start 2P', cursive;
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-    .request-item p {
-        font-size: 14px;
-        margin: 0;
-    }
+
     .btn {
-        width: 100%;
+        width: 90%;
+        max-width: 600px;
         background-color: #4287f5;
         color: white;
         padding: 10px;
@@ -72,34 +74,25 @@
         cursor: pointer;
         font-size: 16px;
         transition: background-color 0.3s ease;
-        margin-top: 20px;
+        text-align: center;
+        text-decoration: none;
     }
+
     .btn:hover {
         background-color: #306bd8;
     }
 </style>
 <body>
     <div class="container">
-        <div class="dashboard-box">
-            <h1>Your Profile</h1>
-            <p><strong>Username:</strong> {{ current_user.username }}</p>
-            <p><strong>Email:</strong> {{ current_user.email }}</p>
-        </div>
-        <div class="dashboard-box">
-            <h1>Your Active Requests</h1>
-            {% if requests %}
-                {% for request in requests %}
-                    <div class="request-item">
-                        <h2>{{ request.title }}</h2>
-                        <p>{{ request.description }}</p>
-                        <p><strong>Quantity:</strong> {{ request.quantity }}</p>
-                        <p><strong>Date Posted:</strong> {{ request.date_posted.strftime('%Y-%m-%d') }}</p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>You have no active requests.</p>
-            {% endif %}
-            <a href="{{ url_for('main.create_request') }}" class="btn">Create New Request</a>
+        <div class="contact-box">
+            <h1>Contact Us</h1>
+            <p>If you have any questions, feel free to reach out to us!</p>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
         </div>
     </div>
 </body>

@@ -3,21 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}PokeTrade Zone{% endblock %}</title>
+    <title>{% block title %}PokeDexZone{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        header {
+            background-color: rgba(51, 51, 51, 0.8); /* Transparent background */
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0; /* Ensure it stays at the very top */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #f2b807;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        .brand {
+            font-family: 'Press Start 2P', cursive;
+            color: #f2b807;
+            font-size: 20px;
+        }
+
+        .content {
+            margin-top: 70px; /* Space for the fixed nav bar */
+        }
+        .alert {
+            padding: 10px;
+            margin: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 80%;
+            margin: 10px auto;
+            color: #ffffff;
+        }
+
+        .alert-success {
+            background-color: #4CAF50; /* Green */
+        }
+
+        .alert-danger {
+            background-color: #f44336; /* Red */
+        }
+
+        .alert-info {
+            background-color: #2196F3; /* Blue */
+        }
+
+    </style>
 </head>
 <body>
     <header>
         <nav>
+            <div class="brand">PokeDexZone</div>
             <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li><a href="{{ url_for('main.dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+                <li><a href="{{ url_for('main.create_request') }}">Create Request</a></li>
+                <li><a href="{{ url_for('main.contact') }}">Contact Us</a></li>
                 {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('register') }}">Sign Up</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
                 {% endif %}
             </ul>
         </nav>
