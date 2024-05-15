@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Profile{% endblock %}
+{% block title %}Edit Profile{% endblock %}
 {% block content %}
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
@@ -20,45 +20,42 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding-top: 70px; /* Adjust for the fixed navbar */
+        padding-top: 70px;
     }
 
-    .profile-box {
+    .form-box {
         background-color: rgba(0, 0, 0, 0.6);
         padding: 30px;
         border-radius: 20px;
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
         width: 90%;
-        max-width: 800px;
+        max-width: 600px;
         text-align: center;
         margin-bottom: 20px;
     }
 
-    .profile-box h1 {
+    .form-box h1 {
         font-family: 'Press Start 2P', cursive;
         font-size: 24px;
         margin-bottom: 20px;
     }
 
-    .profile-box p {
-        font-size: 16px;
-        line-height: 1.5;
-        margin-bottom: 20px;
-    }
-
-    .profile-detail {
-        margin-bottom: 10px;
-    }
-
-    .btn-group {
+    .form-box form {
         display: flex;
-        justify-content: space-between;
-        width: 90%;
-        max-width: 400px;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .form-box input {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
     }
 
     .btn {
-        width: 48%;
+        width: 100%;
         background-color: #4287f5;
         color: white;
         padding: 10px;
@@ -67,8 +64,7 @@
         cursor: pointer;
         font-size: 16px;
         transition: background-color 0.3s ease;
-        text-align: center;
-        text-decoration: none;
+        margin-top: 20px;
     }
 
     .btn:hover {
@@ -77,16 +73,15 @@
 </style>
 <body>
     <div class="container">
-        <div class="profile-box">
-            <h1>Your Profile</h1>
-            <p class="profile-detail"><strong>Username:</strong> {{ current_user.username }}</p>
-            <p class="profile-detail"><strong>Email:</strong> {{ current_user.email }}</p>
-        </div>
-        <div class="btn-group">
-            <a href="{{ url_for('main.edit_profile') }}" class="btn">Edit Profile</a>
-            <a href="{{ url_for('main.change_password') }}" class="btn">Change Password</a>
+        <div class="form-box">
+            <h1>Edit Profile</h1>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.username.label }} {{ form.username(size=32) }}<br>
+                {{ form.email.label }} {{ form.email(size=32) }}<br>
+                <input type="submit" class="btn" value="Update Profile">
+            </form>
         </div>
     </div>
 </body>
 {% endblock %}
-
