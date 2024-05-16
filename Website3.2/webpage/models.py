@@ -18,7 +18,7 @@ class requests(db.Model):
     quantity = db.Column(db.Integer)
     image = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
+    comm = db.relationship('comments', backref='requests', lazy=True)
 
 
 class users(db.Model, UserMixin):
@@ -27,5 +27,5 @@ class users(db.Model, UserMixin):
     password = db.Column(db.String(150))
     username = db.Column(db.String(200), unique=True)
     req = db.relationship('requests', backref='users', lazy=True)
-    
+    comm = db.relationship('comments', backref='users', lazy=True)    
    
