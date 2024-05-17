@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, request, flash
-from flask_login import login_required, current_user
-from .models import requests, users
+from flask_login import login_required, current_user, current_request
+from .models import comments, requests, users
 from . import db
 
 main = Blueprint('main', __name__)
@@ -13,13 +13,22 @@ def index():
 
 
 
-@main.route("/home")
+@main.route("/home", methods=['GET', 'POST'])
 @login_required
 def home():
-    
+    if request.method == 'POST':
+        comment = request.form.get('comment')
+
+        # Creates new comment with info from form
+        new_comm = comments(comment=comment, user_id=current_user.id, request_id=current_request.id)
+
     #all_reqs displays all requests from all users
     all_reqs = requests.query.all()
-    return render_template("home2.html", user=current_user, all_reqs=all_reqs)
+
+    #all_comms displays all comments from all users 
+    all_comms = comments.query.all()
+
+    return render_template("home2.html", user=current_user, request=current_request, all_reqs=all_reqs, all_comms=all_comms)
 
 
 @main.route("/create_request", methods=['GET', 'POST'])
