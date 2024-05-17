@@ -1,0 +1,132 @@
+
+
+.header1 {
+    background-color: rgba(51, 51, 51, 1);
+    color: orange;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    }
+
+
+.header1 a {
+    color: #f2b807;
+    border-radius: 7px; 
+    border: 1px #f2b807;
+    padding: 7px;
+    margin: 0px 10px;
+    cursor: pointer;
+    }
+    
+
+
+
+
+.header1 .button_login {
+    background-color:navy; 
+    color: white;
+    }
+
+
+
+header a:hover {
+        text-decoration: none;
+    }
+
+.header1 .search-bar {
+        display: flex;
+        align-items: center;
+        
+    }
+
+
+.brand {
+        font-family: 'Press Start 2P', cursive;
+        color: #f2b807;
+        font-size: 20px;
+        order: -1; 
+        margin-right: auto; 
+    }
+
+.mainbody {
+    background-image: url('https://wallpapers-clan.com/wp-content/uploads/2023/10/pokemon-eevee-aesthetic-night-desktop-wallpaper-preview.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+
+
+/* ========================================================================= */
+/*                         base container styles                             */
+/* ========================================================================= */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100%;
+    }
+
+.form-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    }
+
+input[type="text"], input[type="number"], textarea, input[type="file"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    color: #333;
+    box-sizing: border-box;
+    display: block; /* Ensure all inputs are block-level elements */
+    margin-left: auto;
+    margin-right: auto; /* Center align all inputs */
+    }
+
+.btn {
+    background-color: #4287f5;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block; /* Make the button a block-level element */
+    width: 50%; /* Set a specific width for the button */
+    margin: 20px auto; /* Center the button and add margin for spacing */
+    }
+
+.btn:hover {
+    background-color: #306bd8;
+    }
+
+label {
+    font-size: 16px;
+    display: block; /* Ensure labels are block-level elements for better control */
+    margin: 10px 0 5px; /* Add some spacing around labels */
+    text-align: left; /* Align the text to the left */
+    width: 90%; /* Match input width */
+    margin-left: auto;
+    margin-right: auto; /* Center align labels */
+    }
+
+
+
+
+    

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Create Request{% endblock %}
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap');
+
+    
+    
+    
+</style>
+<body class="mainbody">
+    <div class="container">
+        <div class="form-box">
+            
+            <h1>Create Your Request</h1>
+            <form id = "Ureq" name = "Ureq" method="post" enctype="multipart/form-data">
+
+                <label for="title">Title:</label>
+                <input type="text" 
+                       id="title" 
+                       name="title" 
+                       placeholder="Enter request title...">
+
+
+                <label for="description">Description:</label>
+                <textarea id="descr" 
+                          name="descr" 
+                          rows="4" 
+                          placeholder="Describe your request..."></textarea>
+
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" 
+                       id="quantity" 
+                       name="quantity" 
+                       placeholder="Number of cards...">
+
+
+                <label for="image">Upload Image:</label>
+                <input type="file" 
+                       id="image" 
+                       name="image" 
+                       accept="image/*">
+
+
+                <button type="submit" class="btn">Post Request</button>
+                
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}

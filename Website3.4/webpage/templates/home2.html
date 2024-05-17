@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}PokeDexZone{% endblock %}
+{% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* Pixelated font for a retro gaming feel */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); /* Roboto for modern, readable text */
+
+    body {
+        margin: 0;
+        background-image: url('https://wallpapers-clan.com/wp-content/uploads/2023/10/pokemon-eevee-aesthetic-night-desktop-wallpaper-preview.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+    }
+
+    .text-box {
+        background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black for text readability */
+        border: 3px solid #f2b807; /* Pikachu yellow border */
+        border-radius: 20px;
+        padding: 20px;
+        width: 90%;
+        max-width: 600px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    h1 {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+    }
+
+    .btn {
+        background-color: #4287f5; /* Pokéball blue */
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .btn:hover, .btn:focus {
+        transform: scale(1.1);
+        background-color: #306bd8;
+        outline: none;
+    }
+
+    .forum_container {
+        background-color: white;
+        width: 100%;
+        padding: 35px;
+    }
+
+    .forum_container p {
+        margin-left: 175px; 
+    }
+
+    .rTitle {
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .uName {
+        font-size: 15px;
+        text-decoration: underline;
+        font-weight:bold;
+    }
+
+    .uploaded-image {
+    width: 200px; /* Set the desired width */
+    height: 200px; /* Set the desired height */
+    object-fit: cover; /* Ensure the image covers the specified dimensions */
+    /* Additional styling properties as needed */
+    }
+
+</style>
+<body>
+    <div class="container">
+        <div class="text-box">
+            <h1>Welcome to PokeDexZone!</h1>
+            <p>Embark on your Pokémon collecting adventure in PokeDexZone! Trade, request, and explore unique Pokémon cards in a community of enthusiasts. Are you ready to become a Pokémon Master?</p>
+            <div class="buttons">
+
+                <button id="sign-up-btn" 
+                        class="button"> 
+                        Sign Up 
+                        </button>
+
+
+                <button id="log-in-btn" 
+                        class="button">
+                        Log In
+                        </button>
+
+            </div>
+        </div>
+    </div>
+    <div>
+
+        <div class = "forum_container">
+            <h1>Requests</h1>
+            {% for req in all_reqs %}
+            <hr>
+            <div>
+                <p class="uName">{{ req.users.username }}</p>
+                <p class="rTitle">{{ req.title }}</p>
+                <p>{{ req.descr }}</p>
+                <p>{{ req.quantity }}</p>
+                {% if req.image %}
+                <img class="uploaded-image" src="{{ url_for('static', filename=req.image.split('static/')[1]) }}" alt="Uploaded Image">
+                {% endif %}
+                <!-- Display more request attributes as needed -->
+
+                <!-- Comment form -->
+                <form action="{{ url_for('main.add_comment', req_id=req.id) }}" method="POST">
+                    <textarea name="comment_content" required></textarea><br>
+                    <button type="submit">Add Comment</button>
+                </form>
+
+                <div class="comments_section">
+                    <h3>Comments</h3>
+                    <ul>
+                        <!-- req.com from "users" class-->
+                        {% for comment in req.com %}
+                        <li>
+                            <p>{{ comment.commenter.username }}:</p><p>{{ comment.time_created }}</p>
+                            <p>{{ comment.text }} </p><br>
+                          
+                        </li>
+                        {% endfor %}
+                    </ul>
+    
+              
+                
+                </div>
+            </div>
+           
+            {% endfor %}
+        </div>
+    </div>
+</body>
+{% endblock %}
