@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Edit Profile</h2>
-    <form method="POST" action="{{ url_for('main.edit_profile') }}">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-        </div>
-        <div>
-            {{ form.email.label }}<br>
-            {{ form.email(size=32) }}<br>
-        </div>
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
+<div class="container">
+    <div class="form-box">
+        <h2>Edit Profile</h2>
+        <form method="POST" action="{{ url_for('main.edit_profile') }}">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32, class_='input-field') }}<br>
+            </div>
+            <div>
+                {{ form.email.label }}<br>
+                {{ form.email(size=32, class_='input-field') }}<br>
+            </div>
+            <div>
+                {{ form.submit(class_='btn') }}
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
