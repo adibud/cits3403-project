@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}PokeDexZone{% endblock %}
+{% block content %}
+<body>
+    <div class="container">
+        <div class="text-box">
+            <h1>Welcome to PokeDexZone!</h1>
+            <p>Embark on your Pokémon collecting adventure in PokeDexZone! Trade, request, and explore unique Pokémon cards in a community of enthusiasts. Are you ready to become a Pokémon Master?</p>
+            <div class="buttons">
+                <a href="{{ url_for('auth.register') }}" class="btn">Sign Up</a>
+                <a href="{{ url_for('auth.login') }}" class="btn">Log In</a>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
