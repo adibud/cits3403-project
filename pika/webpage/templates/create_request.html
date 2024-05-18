@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Create Request</h2>
+    <form method="POST" action="{{ url_for('main.create_request') }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.title.label }}<br>
+            {{ form.title(size=32) }}<br>
+        </div>
+        <div>
+            {{ form.descr.label }}<br>
+            {{ form.descr(size=32) }}<br>
+        </div>
+        <div>
+            {{ form.quantity.label }}<br>
+            {{ form.quantity() }}<br>
+        </div>
+        <div>
+            {{ form.image.label }}<br>
+            {{ form.image() }}<br>
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+{% endblock %}
