@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}PokeDexZone{% endblock %}
+{% block content %}
+
+<!-- Main content for the Home page -->
+<div class="container">
+    <div class="text-box">
+        <h1>Welcome to PokeDexZone!</h1>
+        <p>Embark on your Pokémon collecting adventure in PokeDexZone! Trade, request, and explore unique Pokémon cards in a community of enthusiasts. Are you ready to become a Pokémon Master?</p>
+        <div class="buttons">
+            <!-- Button to sign up, redirects to the registration page -->
+            <button id="sign-up-btn" class="btn">Sign Up</button>
+            <!-- Button to log in, redirects to the login page -->
+            <button id="log-in-btn" class="btn">Log In</button>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript to handle button clicks for navigation -->
+<script>
+    document.getElementById("sign-up-btn").onclick = function() {
+        window.location.href = "{{ url_for('auth.register') }}";
+    };
+    document.getElementById("log-in-btn").onclick = function() {
+        window.location.href = "{{ url_for('auth.login') }}";
+    };
+</script>
+
+{% endblock %}

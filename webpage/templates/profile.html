@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Main content for the Profile page -->
+<div class="container">
+    <div class="profile-box">
+        <h2>{{ user.username }}'s Profile</h2>
+        <!-- Display user's profile picture if available -->
+        {% if user.profile_picture %}
+            <img src="{{ url_for('static', filename=user.profile_picture) }}" alt="Profile Picture" class="profile-picture">
+        {% endif %}
+        <!-- Display user's bio if available -->
+        {% if user.bio %}
+            <p>{{ user.bio }}</p>
+        {% endif %}
+        <!-- Display user's points and badges -->
+        <p>Points: {{ user.points }}</p>
+        <div class="badges">
+            {% for badge in user.badges %}
+                <img src="{{ url_for('static', filename='badges/' ~ badge.icon) }}" alt="{{ badge.name }}" title="{{ badge.name }}" class="badge-icon">
+            {% endfor %}
+        </div>
+        <!-- Form for editing user profile details -->
+        <form method="POST" action="{{ url_for('main.profile') }}" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32, class_='input-field') }}<br>
+            </div>
+            <div>
+                {{ form.email.label }}<br>
+                {{ form.email(size=32, class_='input-field') }}<br>
+            </div>
+            <div>
+                {{ form.bio.label }}<br>
+                {{ form.bio(rows=4, class_='input-field') }}<br>
+            </div>
+            <div>
+                {{ form.profile_picture.label }}<br>
+                {{ form.profile_picture(class_='input-field') }}<br>
+            </div>
+            <div>
+                {{ form.submit(class_='btn') }}
+            </div>
+        </form>
+
+        <!-- view personal requests -->
+        <h2>Your Requests</h2>
+        <ul>
+            {% for req in user.requests %}
+                <li>{{ req.title }} - {{ req.descr }}</li>
+                {% if req.image %}
+                        <div class="request-image-profile">
+                            <img src="{{ req.image }}" alt="{{ req.title }}">
+                            <div class="request-buttons">
+                                <form method="POST" action="{{ url_for('main.edit_request', request_id=req.id) }}">
+                                    <button type="submit" class="btn edit-btn">Edit</button>
+                                </form>
+                                <form method="POST" action="{{ url_for('main.delete_request', request_id=req.id) }}">
+                                    <button type="submit" class="btn delete-btn">Delete Request</button>
+                                </form>
+                            </div>
+                        </div>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+   
+</div>
+{% endblock %}
+
