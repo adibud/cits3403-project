@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Main content for the Create Request page -->
+<div class="container">
+    <div class="form-box">
+        <h2>Create Request</h2>
+        <!-- Form for creating a new request -->
+        <form method="POST" action="{{ url_for('main.create_request') }}" enctype="multipart/form-data">
+            <!-- CSRF protection token -->
+            {{ form.hidden_tag() }}
+            <!-- Title input field -->
+            <div>
+                {{ form.title.label }}<br>
+                {{ form.title(size=32, class_='input-field') }}<br>
+            </div>
+            <!-- Description input field -->
+            <div>
+                {{ form.descr.label }}<br>
+                {{ form.descr(size=32, class_='input-field') }}<br>
+            </div>
+            <!-- Quantity input field -->
+            <div>
+                {{ form.quantity.label }}<br>
+                {{ form.quantity(class_='input-field') }}<br>
+            </div>
+            <!-- Image file input field -->
+            <div>
+                {{ form.image.label }}<br>
+                {{ form.image(class_='input-field') }}<br>
+            </div>
+            <!-- Submit button to create the request -->
+            <div>
+                {{ form.submit(class_='btn') }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
