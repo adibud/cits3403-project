@@ -137,9 +137,9 @@ The application follows the MVC (Model-View-Controller) design pattern using Fla
 
 The repository includes a folder named "deliverables" with three short screen-capture videos (.mp4) or image files (.jpeg, .png). These files show the completion of suitable intermediate deliverables as per Agile methodology. Each file is named the same as a Git tag in the project and points to the commit where the video/image was made.
 
-1. **deliverables/video1.mp4**: Demonstrates user registration and login functionality.
-2. **deliverables/video2.mp4**: Demonstrates creating, editing, and deleting requests.
-3. **deliverables/video3.mp4**: Demonstrates profile management and earning badges.
+1. **deliverables/homepage.jpeg**: Demonstrates the homepage design.
+2. **deliverables/requests.jpeg**: Demonstrates creating, editing, and deleting requests design.
+3. **deliverables/final_website_walkthrough.mp4**: Demonstrates the entire website function and features.
 
 ## Contributing
 
